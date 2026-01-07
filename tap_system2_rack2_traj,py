@@ -1,0 +1,121 @@
+import time
+import json
+import logging
+import threading
+from xarm.wrapper import XArmAPI
+
+# === Setup Logger ===
+logging.basicConfig(
+    filename='trajectory_record.log',
+    level=logging.INFO,
+    format='%(asctime)s [TRAJ] %(message)s',
+)
+
+# === Connect to Robot Arm ===
+xarm_ip = "192.168.1.159"
+arm = XArmAPI(xarm_ip)
+arm.connect()
+arm.clean_error()
+arm.clean_warn()
+arm.motion_enable(enable=True)
+arm.set_mode(0)
+arm.set_state(0)
+
+# === Global Setup ===
+RECORD_FILE = "tap_system2_rack2_trajectory.json"
+RECORD_FREQ = 250  # Hz
+RECORD_DT = 1 / RECORD_FREQ
+recorded_sequence = {"current": []}
+
+# === Helper: Record step ===
+def record_step(step_type, data, delay):
+    recorded_sequence["current"].append({
+        "type": step_type,
+        "delay": delay,
+        **data
+    })
+    logging.info(f"Recorded step: {step_type}, {len(data.get('points', []))} points")
+
+# === Helper: Trajectory recorder thread ===
+def record_trajectory_during_motion(duration, freq=RECORD_FREQ):
+    samples = []
+    start = time.time()
+    while time.time() - start < duration:
+        _, joints = arm.get_servo_angle(is_radian=False)
+        if joints:
+            samples.append([float(a) for a in joints[:6]])
+        time.sleep(1 / freq)
+    return samples
+
+# === Main move with trajectory recording ===
+def move_to_cartesian_trajectory(cartesian_position, speed=50, comment=None):
+    if comment:
+        print(f"--- {comment} ---")
+
+    # --- Inverse Kinematics ---
+    code, joint_angles = arm.get_inverse_kinematics(
+        cartesian_position, input_is_radian=False, return_is_radian=False
+    )
+    if code != 0 or not joint_angles:
+        print(f"[ERROR] IK failed for {cartesian_position}")
+        return False
+
+    joint_angles = [float(a) for a in joint_angles[:6]]
+
+    # Estimate motion duration based on joint delta and speed
+    _, current_angles = arm.get_servo_angle(is_radian=False)
+    if not current_angles:
+        return False
+    joint_deltas = [abs(joint_angles[i] - current_angles[i]) for i in range(6)]
+    max_delta = max(joint_deltas)
+    duration_est = max(1.0, max_delta / (speed * 0.8))  # empirical scaling
+
+    # --- Start recording in parallel ---
+    trajectory_points = []
+    recorder = threading.Thread(
+        target=lambda: trajectory_points.extend(record_trajectory_during_motion(duration_est))
+    )
+    recorder.start()
+
+    # --- Perform motion ---
+    start_time = time.time()
+    arm.set_servo_angle(angle=joint_angles, speed=speed, is_radian=False, wait=True)
+    duration = time.time() - start_time
+
+    recorder.join()
+
+    # --- Record result ---
+    record_step("trajectory", {
+        "frequency": RECORD_FREQ,
+        "points": trajectory_points,
+        "speed": speed,
+        "target": cartesian_position
+    }, duration)
+
+    print(f"[OK] Recorded {len(trajectory_points)} trajectory points")
+    return True
+
+# === Example Task Sequence (only Cartesian coordinates) ===
+def tap_rack2():
+    logging.info("Started: TAP trajectory recording")
+    recorded_sequence["current"] = []
+
+    move_to_cartesian_trajectory([59, 608.9, -6.4, 6.7, 1, 173.1], speed=90, comment="Base start")
+    move_to_cartesian_trajectory([113.5, 612.2, 38.7, 17.4, 1.7, 174.7], speed=90, comment="Approach slot")
+    move_to_cartesian_trajectory([113.5, 642.6, 135, 17.4, 1.7, 174.7], speed=90, comment="Lift card")
+    move_to_cartesian_trajectory([113.5, 612.2, 38.7, 17.4, 1.7, 174.7], speed=90, comment="Return down")
+    move_to_cartesian_trajectory([59, 608.9, -6.4, 6.7, 1, 173.1], speed=90, comment="Return to base")
+    move_to_cartesian_trajectory([124.3, 617.3, -132.2, 12.1, -3, 177.2], speed=75, comment="Move to tap position")
+
+    logging.info("Completed: TAP trajectory recording")
+    return recorded_sequence["current"]
+
+# === MAIN EXECUTION ===
+def main():
+    data = {"tap_system2_rack2_trajectory": tap_rack2()}
+    with open(RECORD_FILE, "w") as f:
+        json.dump(data, f, indent=4)
+    print(f"\n✅ Saved trajectory data to {RECORD_FILE}")
+
+if __name__ == "__main__":
+    main()

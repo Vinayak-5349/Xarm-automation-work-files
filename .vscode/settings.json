@@ -1,0 +1,8 @@
+{
+    "ros.distro": "humble",
+    "python-envs.pythonProjects": [],
+    "python-envs.defaultEnvManager": "ms-python.python:system",
+    "python.analysis.extraPaths": [
+        "/home/vinayak/Desktop/TJ/robotic_arm/xarm_pos_automation/xArm-Python-SDK"
+    ]
+}

@@ -1,0 +1,71 @@
+2025-08-05 16:43:24,772 [API] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.16.41.126:5000
+2025-08-05 16:43:24,773 [API] [33mPress CTRL+C to quit[0m
+2025-08-05 16:46:39,170 [API] Executing action: tap_system1_rack1
+2025-08-05 16:47:07,501 [API] Executing PIN sequence: 4829o
+2025-08-05 16:47:23,011 [API] 127.0.0.1 - - [05/Aug/2025 16:47:23] "POST /action HTTP/1.1" 200 -
+2025-08-05 16:51:31,257 [API] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.16.41.126:5000
+2025-08-05 16:51:31,257 [API] [33mPress CTRL+C to quit[0m
+2025-08-05 16:51:37,116 [API] Executing action: tap_system1_rack1
+2025-08-05 16:52:05,467 [API] Executing PIN sequence: 4829o
+2025-08-05 16:52:20,911 [API] 127.0.0.1 - - [05/Aug/2025 16:52:20] "POST /action HTTP/1.1" 200 -
+2025-08-05 17:19:47,621 [API] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.16.41.126:5000
+2025-08-05 17:19:47,621 [API] [33mPress CTRL+C to quit[0m
+2025-08-05 17:19:53,683 [API] Executing action: tap_system1_rack1
+2025-08-05 17:20:12,637 [API] Executing PIN sequence: 4829o
+2025-08-05 17:20:28,043 [API] 127.0.0.1 - - [05/Aug/2025 17:20:28] "POST /action HTTP/1.1" 200 -
+2025-08-05 17:22:23,512 [API] Executing action: tap_system1_rack1
+2025-08-05 17:22:42,460 [API] Executing PIN sequence: 4829o
+2025-08-05 17:22:57,876 [API] 127.0.0.1 - - [05/Aug/2025 17:22:57] "POST /action HTTP/1.1" 200 -
+2025-08-05 17:23:34,682 [API] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.16.41.126:5000
+2025-08-05 17:23:34,682 [API] [33mPress CTRL+C to quit[0m
+2025-08-05 17:23:42,653 [API] Executing action: tap_system1_rack1
+2025-08-05 17:24:01,592 [API] Executing PIN sequence: 4829o
+2025-08-05 17:24:17,034 [API] 127.0.0.1 - - [05/Aug/2025 17:24:17] "POST /action HTTP/1.1" 200 -
+2025-08-05 17:37:12,177 [API] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.16.41.126:5000
+2025-08-05 17:37:12,177 [API] [33mPress CTRL+C to quit[0m
+2025-08-05 17:37:16,809 [API] Executing action: tap_system1_rack1
+2025-08-05 17:37:35,824 [API] Executing PIN sequence: 4829o
+2025-08-05 17:37:51,226 [API] 127.0.0.1 - - [05/Aug/2025 17:37:51] "POST /action HTTP/1.1" 200 -
+2025-08-05 17:40:31,476 [API] Executing action: tap_system1_rack1
+2025-08-05 17:40:50,470 [API] Executing PIN sequence: 4829o
+2025-08-05 17:41:05,932 [API] 127.0.0.1 - - [05/Aug/2025 17:41:05] "POST /action HTTP/1.1" 200 -
+2025-08-05 17:45:28,863 [API] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.16.41.126:5000
+2025-08-05 17:45:28,863 [API] [33mPress CTRL+C to quit[0m
+2025-08-05 17:45:35,004 [API] Executing action: tap_system1_rack1
+2025-08-05 17:45:56,015 [API] Executing PIN sequence: 4829o
+2025-08-05 17:46:11,452 [API] 127.0.0.1 - - [05/Aug/2025 17:46:11] "POST /action HTTP/1.1" 200 -
+2025-08-05 17:48:24,446 [API] 127.0.0.1 - - [05/Aug/2025 17:48:24] "[33mPOST /payment_action HTTP/1.1[0m" 404 -
+2025-08-05 17:48:33,621 [API] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.16.41.126:5000
+2025-08-05 17:48:33,622 [API] [33mPress CTRL+C to quit[0m
+2025-08-05 17:48:37,126 [API] Executing action: tap_system1_rack1
+2025-08-05 17:48:58,153 [API] Executing PIN sequence: 4829o
+2025-08-05 17:49:13,652 [API] 127.0.0.1 - - [05/Aug/2025 17:49:13] "POST /payment_action HTTP/1.1" 200 -
+2025-08-05 17:49:25,432 [API] Executing action: tap_system1_rack1
+2025-08-05 17:49:46,461 [API] Executing PIN sequence: 4829o
+2025-08-05 17:50:01,916 [API] 127.0.0.1 - - [05/Aug/2025 17:50:01] "POST /payment_action HTTP/1.1" 200 -
+2025-08-25 16:25:34,068 [API] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.246.38.1:5000
+2025-08-25 16:25:34,068 [API] [33mPress CTRL+C to quit[0m
